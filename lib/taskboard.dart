@@ -21,13 +21,49 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
       title: "Task Two",
       description:
           "Your Personal task management and planning solution for planning your day, week & months",
-      deadline: DateTime(2023, 5, 25, 12, 55),
+      deadline: DateTime(2023, 5, 21, 12, 55),
     ),
     TaskCardData(
       title: "Task Three",
       description:
           "Your Personal task management and planning solution for planning your day, week & months",
-      deadline: DateTime(2023, 5, 25, 12, 55),
+      deadline: DateTime(2023, 5, 11, 11, 55),
+    ),
+    TaskCardData(
+      title: "Task Three",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 3, 31, 11, 55),
+    ),
+    TaskCardData(
+      title: "Task Three",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 5, 1, 21, 55),
+    ),
+    TaskCardData(
+      title: "Task Three",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 5, 2, 23, 55),
+    ),
+    TaskCardData(
+      title: "Task Three",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 5, 3, 23, 55),
+    ),
+    TaskCardData(
+      title: "Task Three",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 5, 22, 23, 55),
+    ),
+    TaskCardData(
+      title: "Task Three",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 5, 23, 23, 55),
     ),
   ];
 
@@ -103,7 +139,7 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    "${task.deadline.hour}:${task.deadline.minute} ${task.deadline.hour >= 12 ? 'pm' : 'am'} ${task.deadline.day == 1 || task.deadline.day == 21 || task.deadline.day == 31 ? '${task.deadline.day}st' : task.deadline.day == 2 || task.deadline.day == 22 ? '${task.deadline.day}nd' : task.deadline.day == 3 ? '${task.deadline.day}rd' : '${task.deadline.day}th'} ${monthFromInt(task.deadline.month)}, ${task.deadline.year}",
+                    "${task.deadline.hour > 12 ? '${task.deadline.hour - 12}' : '${task.deadline.hour}'}:${task.deadline.minute} ${task.deadline.hour >= 12 ? 'pm' : 'am'} ${task.deadline.day == 1 || task.deadline.day == 21 || task.deadline.day == 31 ? '${task.deadline.day}st' : task.deadline.day == 2 || task.deadline.day == 22 ? '${task.deadline.day}nd' : task.deadline.day == 3 ? '${task.deadline.day}rd' : '${task.deadline.day}th'} ${monthFromInt(task.deadline.month)}, ${task.deadline.year}",
                     style: GoogleFonts.inter(
                       fontSize: 10,
                       fontWeight: FontWeight.w300,
@@ -114,6 +150,10 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
             ),
           );
         })),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
       ),
     );
   }
