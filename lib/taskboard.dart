@@ -31,12 +31,34 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
     ),
   ];
 
-  String formattedDateTime(DateTime dateTime) {
-    int hour = dateTime.hour;
-    int minute = dateTime.minute;
-
-    if (hour >= 12 && minute > 0) {
-      return "$hour:$minute pm "
+  String monthFromInt(int monthInt) {
+    switch (monthInt) {
+      case 1:
+        return "January";
+      case 2:
+        return "February";
+      case 3:
+        return "March";
+      case 4:
+        return "April";
+      case 5:
+        return "May";
+      case 6:
+        return "June";
+      case 7:
+        return "July";
+      case 8:
+        return "August";
+      case 9:
+        return "September";
+      case 10:
+        return "October";
+      case 11:
+        return "November";
+      case 12:
+        return "December";
+      default:
+        throw "Invalid month index";
     }
   }
 
@@ -81,7 +103,7 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
                 Align(
                   alignment: Alignment.centerRight,
                   child: Text(
-                    task.deadline.toString(),
+                    "${task.deadline.hour}:${task.deadline.minute} ${task.deadline.hour >= 12 ? 'pm' : 'am'} ${task.deadline.day == 1 || task.deadline.day == 21 || task.deadline.day == 31 ? '${task.deadline.day}st' : task.deadline.day == 2 || task.deadline.day == 22 ? '${task.deadline.day}nd' : task.deadline.day == 3 ? '${task.deadline.day}rd' : '${task.deadline.day}th'} ${monthFromInt(task.deadline.month)}, ${task.deadline.year}",
                     style: GoogleFonts.inter(
                       fontSize: 10,
                       fontWeight: FontWeight.w300,
