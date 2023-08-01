@@ -1,6 +1,5 @@
 import 'package:assignment_1/taskcard.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TaskBoardPage extends StatefulWidget {
   const TaskBoardPage({super.key});
