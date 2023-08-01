@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../models/task.dart';
+
 class TaskCardWidget extends StatefulWidget {
   final TaskCardData taskCardData;
 
@@ -89,16 +91,4 @@ class _TaskCardWidgetState extends State<TaskCardWidget> {
       ),
     );
   }
-}
-
-class TaskCardData {
-  String title;
-  String description;
-  DateTime deadline;
-
-  TaskCardData({
-    required this.title,
-    required this.description,
-    required this.deadline,
-  });
 }
