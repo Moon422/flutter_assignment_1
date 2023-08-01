@@ -15,6 +15,12 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
       title: "Task One",
       description:
           "Your Personal task management and planning solution for planning your day, week & months",
+      deadline: DateTime(2023, 5, 23, 12, 55),
+    ),
+    TaskCardData(
+      title: "Task One",
+      description:
+          "Your Personal task management and planning solution for planning your day, week & months",
       deadline: DateTime(2023, 5, 25, 12, 55),
     ),
     TaskCardData(
