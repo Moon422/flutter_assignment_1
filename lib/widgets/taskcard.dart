@@ -45,6 +45,10 @@ class _TaskCardWidgetState extends State<TaskCardWidget> {
     }
   }
 
+  String formatDatetime(DateTime dateTime) {
+    return "${dateTime.hour > 12 ? '${dateTime.hour - 12}' : '${dateTime.hour}'}:${dateTime.minute} ${dateTime.hour >= 12 ? 'pm' : 'am'} ${dateTime.day == 1 || dateTime.day == 21 || dateTime.day == 31 ? '${dateTime.day}st' : dateTime.day == 2 || dateTime.day == 22 ? '${dateTime.day}nd' : dateTime.day == 3 ? '${dateTime.day}rd' : '${dateTime.day}th'} ${monthFromInt(dateTime.month)}, ${dateTime.year}";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -74,7 +78,7 @@ class _TaskCardWidgetState extends State<TaskCardWidget> {
           Align(
             alignment: Alignment.centerRight,
             child: Text(
-              "${widget.taskCardData.deadline.hour > 12 ? '${widget.taskCardData.deadline.hour - 12}' : '${widget.taskCardData.deadline.hour}'}:${widget.taskCardData.deadline.minute} ${widget.taskCardData.deadline.hour >= 12 ? 'pm' : 'am'} ${widget.taskCardData.deadline.day == 1 || widget.taskCardData.deadline.day == 21 || widget.taskCardData.deadline.day == 31 ? '${widget.taskCardData.deadline.day}st' : widget.taskCardData.deadline.day == 2 || widget.taskCardData.deadline.day == 22 ? '${widget.taskCardData.deadline.day}nd' : widget.taskCardData.deadline.day == 3 ? '${widget.taskCardData.deadline.day}rd' : '${widget.taskCardData.deadline.day}th'} ${monthFromInt(widget.taskCardData.deadline.month)}, ${widget.taskCardData.deadline.year}",
+              formatDatetime(widget.taskCardData.deadline),
               style: GoogleFonts.inter(
                 fontSize: 10,
                 fontWeight: FontWeight.w300,
