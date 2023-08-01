@@ -1,5 +1,6 @@
 import 'package:assignment_1/models/task.dart';
 import 'package:assignment_1/screens/add_task_page.dart';
+import 'package:assignment_1/widgets/my_appbar.dart';
 import 'package:assignment_1/widgets/taskcard.dart';
 import 'package:flutter/material.dart';
 
@@ -78,14 +79,7 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text("Task Board"),
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        elevation: 5,
-        shadowColor: Colors.black,
-        surfaceTintColor: Colors.transparent,
-      ),
+      appBar: MyAppBar(titleText: "Task Board"),
       body: ListView(
         children: List.from(tasks.map((task) {
           return TaskCardWidget(taskCardData: task);
