@@ -1,4 +1,5 @@
 import 'package:assignment_1/models/task.dart';
+import 'package:assignment_1/screens/add_task_page.dart';
 import 'package:assignment_1/widgets/taskcard.dart';
 import 'package:flutter/material.dart';
 
@@ -91,7 +92,19 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
         })),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (ctx) => AddTaskPage(
+                onTaskAddCallback: (task) {
+                  setState(() {
+                    tasks.add(task);
+                  });
+                },
+              ),
+            ),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
