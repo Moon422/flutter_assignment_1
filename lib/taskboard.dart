@@ -67,37 +67,6 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
     ),
   ];
 
-  String monthFromInt(int monthInt) {
-    switch (monthInt) {
-      case 1:
-        return "January";
-      case 2:
-        return "February";
-      case 3:
-        return "March";
-      case 4:
-        return "April";
-      case 5:
-        return "May";
-      case 6:
-        return "June";
-      case 7:
-        return "July";
-      case 8:
-        return "August";
-      case 9:
-        return "September";
-      case 10:
-        return "October";
-      case 11:
-        return "November";
-      case 12:
-        return "December";
-      default:
-        throw "Invalid month index";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,43 +81,7 @@ class _TaskBoardPageState extends State<TaskBoardPage> {
       ),
       body: ListView(
         children: List.from(tasks.map((task) {
-          return Container(
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: const Color(0xF5F8FBFF),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  task.title,
-                  style: GoogleFonts.inter(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                Text(
-                  task.description,
-                  style: GoogleFonts.inter(
-                    fontSize: 10,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Text(
-                    "${task.deadline.hour > 12 ? '${task.deadline.hour - 12}' : '${task.deadline.hour}'}:${task.deadline.minute} ${task.deadline.hour >= 12 ? 'pm' : 'am'} ${task.deadline.day == 1 || task.deadline.day == 21 || task.deadline.day == 31 ? '${task.deadline.day}st' : task.deadline.day == 2 || task.deadline.day == 22 ? '${task.deadline.day}nd' : task.deadline.day == 3 ? '${task.deadline.day}rd' : '${task.deadline.day}th'} ${monthFromInt(task.deadline.month)}, ${task.deadline.year}",
-                    style: GoogleFonts.inter(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+          return TaskCardWidget(taskCardData: task);
         })),
       ),
       floatingActionButton: FloatingActionButton(
