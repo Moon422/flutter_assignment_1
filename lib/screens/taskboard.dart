@@ -1,4 +1,4 @@
-import 'package:assignment_1/taskcard.dart';
+import 'package:assignment_1/widgets/taskcard.dart';
 import 'package:flutter/material.dart';
 
 class TaskBoardPage extends StatefulWidget {
