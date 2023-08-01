@@ -48,7 +48,7 @@ class _TaskCardWidgetState extends State<TaskCardWidget> {
   }
 
   String formatDatetime(DateTime dateTime) {
-    return "${dateTime.hour > 12 ? '${dateTime.hour - 12}' : '${dateTime.hour}'}:${dateTime.minute} ${dateTime.hour >= 12 ? 'pm' : 'am'} ${dateTime.day == 1 || dateTime.day == 21 || dateTime.day == 31 ? '${dateTime.day}st' : dateTime.day == 2 || dateTime.day == 22 ? '${dateTime.day}nd' : dateTime.day == 3 ? '${dateTime.day}rd' : '${dateTime.day}th'} ${monthFromInt(dateTime.month)}, ${dateTime.year}";
+    return "${dateTime.hour > 12 ? '${dateTime.hour - 12}' : '${dateTime.hour}'}:${dateTime.minute} ${dateTime.hour >= 12 ? 'pm' : 'am'} ${dateTime.day == 1 || dateTime.day == 21 || dateTime.day == 31 ? '${dateTime.day}st' : dateTime.day == 2 || dateTime.day == 22 ? '${dateTime.day}nd' : dateTime.day == 3 || dateTime.day == 23 ? '${dateTime.day}rd' : '${dateTime.day}th'} ${monthFromInt(dateTime.month)}, ${dateTime.year}";
   }
 
   @override
