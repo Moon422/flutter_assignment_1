@@ -2,10 +2,18 @@ import 'package:assignment_1/models/task.dart';
 import 'package:assignment_1/widgets/my_appbar.dart';
 import 'package:flutter/material.dart';
 
-class AddTaskPage extends StatelessWidget {
+class AddTaskPage extends StatefulWidget {
   final void Function(TaskCardData) onTaskAddCallback;
 
   const AddTaskPage({super.key, required this.onTaskAddCallback});
+
+  @override
+  State<AddTaskPage> createState() => _AddTaskPageState();
+}
+
+class _AddTaskPageState extends State<AddTaskPage> {
+  String taskName = "";
+  String description = "";
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +26,11 @@ class AddTaskPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
+                onChanged: (value) {
+                  setState(() {
+                    taskName = value;
+                  });
+                },
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(),
@@ -30,6 +43,9 @@ class AddTaskPage extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
+                onChanged: (value) {
+                  description = value;
+                },
                 decoration: const InputDecoration(
                   enabledBorder: OutlineInputBorder(),
                   focusedBorder: OutlineInputBorder(),
@@ -56,7 +72,15 @@ class AddTaskPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  widget.onTaskAddCallback(
+                    TaskCardData(
+                      title: taskName,
+                      description: description,
+                      deadline: DateTime.now(),
+                    ),
+                  );
+                },
                 child: const Text("Add Task"),
               ),
             ],
