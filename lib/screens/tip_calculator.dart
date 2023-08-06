@@ -10,7 +10,20 @@ class TipCalculator extends StatefulWidget {
 }
 
 class _TipCalculatorState extends State<TipCalculator> {
-  static const Color cardBackground = Color(0xF5F8FBFF);
+  static const Color cardBackground = Color.fromARGB(255, 255, 0, 0);
+  static const Color calculateBtnColor = Color.fromARGB(255, 0, 0, 0);
+  static const Color clearBtnColor = Color.fromARGB(255, 255, 117, 17);
+
+  final formKey = GlobalKey<FormState>();
+
+  double bill = 0.0;
+  double tipPercentage = 0.0;
+  int numberOfPeople = 0;
+  double totalPayable = 0;
+
+  double calculateTotalBill() {
+    return bill * (1 + tipPercentage / 100);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +42,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                 margin: const EdgeInsets.only(bottom: 10),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: cardBackground,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Padding(
@@ -45,7 +58,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                         textAlign: TextAlign.center,
                       ),
                       Text(
-                        "\$ 0.00",
+                        "\$ ${totalPayable.toStringAsFixed(2)}",
                         style: GoogleFonts.roboto(
                           fontSize: 20,
                           fontWeight: FontWeight.w700,
@@ -59,14 +72,14 @@ class _TipCalculatorState extends State<TipCalculator> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Total Persons",
+                                "Bill",
                                 style: GoogleFonts.roboto(
                                   fontSize: 10,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),
                               Text(
-                                "05",
+                                "\$ ${bill.toStringAsFixed(2)}",
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -75,7 +88,6 @@ class _TipCalculatorState extends State<TipCalculator> {
                             ],
                           ),
                           Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
                                 "Tip Amount",
@@ -83,10 +95,31 @@ class _TipCalculatorState extends State<TipCalculator> {
                                   fontSize: 10,
                                   fontWeight: FontWeight.w300,
                                 ),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "\$ ${(bill * tipPercentage / 100).toStringAsFixed(2)}",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Total Persons",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w300,
+                                ),
                                 textAlign: TextAlign.end,
                               ),
                               Text(
-                                "\$ 20.00",
+                                numberOfPeople.toString(),
                                 style: GoogleFonts.roboto(
                                   fontSize: 14,
                                   fontWeight: FontWeight.w600,
@@ -103,7 +136,7 @@ class _TipCalculatorState extends State<TipCalculator> {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: cardBackground,
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: Padding(
@@ -115,7 +148,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                         "Amount Per Person",
                       ),
                       Text(
-                        "\$ 0.00",
+                        "\$ ${numberOfPeople > 0 ? (totalPayable / numberOfPeople).toStringAsFixed(2) : '💰️'}",
                         style: GoogleFonts.roboto(
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -128,8 +161,98 @@ class _TipCalculatorState extends State<TipCalculator> {
               ),
               const Spacer(),
               Form(
+                key: formKey,
                 child: Column(
-                  children: [],
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Total bill",
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ),
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        setState(() {
+                          bill = value.isEmpty ? 0 : double.parse(value);
+                        });
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: cardBackground,
+                        hintText: "Please enter total bill",
+                        suffixIcon: const Icon(Icons.attach_money),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Tip percentage",
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ),
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        setState(() {
+                          tipPercentage =
+                              value.isEmpty ? 0 : double.parse(value);
+                        });
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: cardBackground,
+                        hintText: "Please enter tip percentage",
+                        suffixIcon: const Icon(Icons.percent),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      "Number of people",
+                      style: GoogleFonts.roboto(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ),
+                    ),
+                    TextFormField(
+                      keyboardType: TextInputType.number,
+                      onChanged: (value) {
+                        setState(() {
+                          numberOfPeople = value.isEmpty ? 0 : int.parse(value);
+                        });
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(16),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        filled: true,
+                        fillColor: cardBackground,
+                        hintText: "Please enter number of people",
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                  ],
                 ),
               ),
               Flex(
@@ -140,14 +263,20 @@ class _TipCalculatorState extends State<TipCalculator> {
                     fit: FlexFit.tight,
                     child: TextButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.black),
+                        backgroundColor:
+                            const MaterialStatePropertyAll(calculateBtnColor),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
                       ),
-                      onPressed: () => {},
+                      onPressed: () {
+                        formKey.currentState?.reset();
+                        setState(() {
+                          totalPayable = calculateTotalBill();
+                        });
+                      },
                       child: Text(
                         "Calculate",
                         style: GoogleFonts.roboto(
@@ -164,14 +293,22 @@ class _TipCalculatorState extends State<TipCalculator> {
                     fit: FlexFit.tight,
                     child: TextButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.black),
+                        backgroundColor:
+                            const MaterialStatePropertyAll(clearBtnColor),
                         shape: MaterialStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5),
                           ),
                         ),
                       ),
-                      onPressed: () => {},
+                      onPressed: () {
+                        formKey.currentState?.reset();
+                        setState(() {
+                          bill = 0;
+                          tipPercentage = 0;
+                          numberOfPeople = 0;
+                        });
+                      },
                       child: Text(
                         "Clear",
                         style: GoogleFonts.roboto(
