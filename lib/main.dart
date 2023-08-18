@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const TipCalculator(),
+      home: const MyHomePage(title: "ABC"),
       // home: const MyHomePage(title: "title"),
     );
   }

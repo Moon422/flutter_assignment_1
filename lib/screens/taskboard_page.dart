@@ -12,7 +12,7 @@ class TaskBoardPage extends StatefulWidget {
 }
 
 class _TaskBoardPageState extends State<TaskBoardPage> {
-  List<TaskCardData> tasks = [];
+  static List<TaskCardData> tasks = [];
 
   @override
   Widget build(BuildContext context) {
